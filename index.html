@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Sec_Portfolio</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+
+<!-- VHS/CRT OVERLAYS -->
+<div class="scanlines"></div>
+<div class="vhs-overlay">
+    <div class="vhs-play">PLAY ►</div>
+    <div class="vhs-time">00.00.00.00</div>
+</div>
+
+<!-- MAIN OS CONTAINER -->
+<div class="os-container">
+
+    <header>
+        <nav class="pill-nav">
+            <div class="nav-brand"><a href="index.html" class="active">ROOT@HOME:~#</a></div>
+            <ul>
+                <li><a href="profile.html">PROFILE</a></li>
+                <li><a href="projects.html">PROJECTS</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Window -->
+        <section id="hero" class="os-window animate-on-scroll">
+            <div class="window-titlebar">
+                <span class="window-title">C:\system\welcome.exe</span>
+                <span class="window-close">✕</span>
+            </div>
+            <div class="window-content hero-content">
+                <h2>Hello, I'm Michael</h2>
+                <p class="typewriter-text">> Aspiring Cyber Security Professional</p>
+                <p class="typewriter-text">> Passionate about building secure systems</p>
+                <p class="blink-cursor">_</p>
+            </div>
+        </section>
+
+        <!-- Action Buttons Section
+        <section class="os-window animate-on-scroll">
+            <div class="window-titlebar">
+                <span class="window-title">C:\system\actions.exe</span>
+                <span class="window-close">✕</span>
+            </div>
+            <div class="window-content">
+                <h2>Quick Actions</h2>
+                <div class="contact-links">
+                    <button class="pill-btn open-window-btn" data-target="bio-preview">About Me</button>
+                    <button class="pill-btn open-window-btn" data-target="skills-preview">Top Skills</button>
+                    <button class="pill-btn open-window-btn" data-target="projects-preview">Projects</button>
+                </div>
+            </div>
+        </section> -->
+
+        <!-- Project Highlights Section -->
+        <section class="os-window animate-on-scroll">
+            <div class="window-titlebar">
+                <span class="window-title">C:\var\www\recent_scans.dir</span>
+                <span class="window-close">✕</span>
+            </div>
+            <div class="window-content">
+                <h2>Recent Deployments</h2>
+                <!-- We wrap the previews in a grid container -->
+                <div class="highlight-grid">
+
+                    <!-- Highlight 1 -->
+                    <a href="https://github.com/M-Bom/python_port_scanner" class="highlight-card">
+                        <!-- We use a placeholder image for now! -->
+                        <img src="images/computer-magnifying-glass-laptop-modern-pc-1451249-pxhere.com.jpg"
+                            alt="Project 1">
+                        <div class="highlight-info">
+                            <h3>Python Port Scanner</h3>
+                            <p>Python</p>
+                        </div>
+                    </a>
+
+                    <!-- Highlight 2 -->
+                    <a href="projects.html" class="highlight-card">
+                        <img src="https://via.placeholder.com/400x250/1a1a1a/00ff41?text=Secure+Auth" alt="Project 2">
+                        <div class="highlight-info">
+                            <h3>Steganography Multi-Tool</h3>
+                            <p>Pyhton / GO</p>
+                        </div>
+                    </a>
+
+                    <!-- Highlight 3 -->
+                    <a href="projects.html" class="highlight-card">
+                        <img src="https://via.placeholder.com/400x250/1a1a1a/00ff41?text=Malware+Analysis"
+                            alt="Project 3">
+                        <div class="highlight-info">
+                            <h3>Malware Lab</h3>
+                            <p>Ghidra / C++</p>
+                        </div>
+                    </a>
+
+                    <!-- Highlight 4 -->
+                    <a href="projects.html" class="highlight-card">
+                        <img src="https://via.placeholder.com/400x250/1a1a1a/00ff41?text=Malware+Analysis"
+                            alt="Project 4">
+                        <div class="highlight-info">
+                            <h3>Malware Lab</h3>
+                            <p>Ghidra / C++</p>
+                        </div>
+                    </a>
+
+                </div>
+
+                <br>
+                <div style="text-align: center;">
+                    <a href="projects.html" class="pill-btn">VIEW_ALL_PROJECTS</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="contact" class="os-window">
+        <div class="window-titlebar">
+            <span class="window-title">connection_hub</span>
+            <span class="window-close">✕</span>
+        </div>
+        <div class="window-content">
+            <h2>Contact Me</h2>
+            <div class="contact-links">
+                <a href="mailto:shkrobotm3@gmail.com" class="pill-btn">EMAIL_ME</a>
+                <a href="https://www.linkedin.com/in/michael-shkrobot-859a64354/" target="_blank"
+                    class="pill-btn">LINKEDIN</a>
+                <a href="https://github.com/M-Bom" target="_blank" class="pill-btn">GITHUB</a>
+            </div>
+            <br>
+            <p>&copy; 2026 Michael Shkrobot. All rights reserved.</p>
+        </div>
+    </footer>
+</div>
+
+<!-- Example of a Draggable Preview Window
+<div id="bio-preview" class="os-window draggable-window">
+    <div class="window-titlebar">
+        <span class="window-title">bio_preview.txt</span>
+        <span class="window-close close-draggable">✕</span>
+    </div>
+    <div class="window-content">
+        <h3>System Admin: Michael</h3>
+        <p>Short preview of my bio...</p>
+        <a href="profile.html" class="pill-btn">Read Full Profile -></a>
+    </div>
+</div>
+
+<div id="skills-preview" class="os-window draggable-window" style="top: 30%; left: 40%">
+    <div class="window-titlebar">
+        <span class="window-title">sys_specs.info</span>
+        <span class="window-close close-draggable">✕</span>
+    </div>
+    <div class="window-content">
+        <h3>Core Competencies</h3>
+        <ul>
+            <li>Python & Bash Scripting</li>
+            <li>Network Forensics (Wireshark)</li>
+            <li>Web App Security (OWASP Top 10)</li>
+            <li>Linux System Administration</li>
+        </ul>
+    </div>
+</div>
+
+<div id="projects-preview" class="os-window draggable-window" style="top: 30%; left: 40%">
+    <div class="window-titlebar">
+        <span class="window-title">projects_preview.txt</span>
+        <span class="window-close close-draggable">✕</span>
+    </div>
+    <div class="window-content">
+        <h3>Projects</h3>
+        <ul>
+            <li>Python & Bash Scripting</li>
+            <li>Network Forensics (Wireshark)</li>
+            <li>Web App Security (OWASP Top 10)</li>
+            <li>Linux System Administration</li>
+            <a href="projects.html" class="pill-btn">More projects -></a>
+        </ul>
+    </div>
+</div> -->
+
+<script src="index.js"></script>
+</body>
+
+<!-- === OS BOOT SEQUENCE === -->
+<div id="boot-screen" class="boot-container">
+    <div class="boot-panel top"></div>
+    <div class="boot-panel bottom"></div>
+    <div class="boot-content">
+        <div class="boot-text">
+            <p>> Sec_OS v2.4.1 Loading...</p>
+            <p class="delay-1">> Initializing network protocols [OK]</p>
+            <p class="delay-2">> Bypassing mainframe security [OK]</p>
+            <p class="delay-3">> Establishing secure connection...</p>
+            <p class="delay-4 blink-cursor">_</p>
+        </div>
+    </div>
+</div>
+
+
+</html>

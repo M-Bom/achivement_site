@@ -1,0 +1,618 @@
+/* 
+  Retro OS / VHS Cyber Portfolio
+  Inspired by 109ichiki.com
+*/
+
+:root {
+    --bg-color: #050505;
+    --grid-color: #1a1a1a;
+    --text-primary: #00ff41;
+    /* Classic terminal green */
+    --text-white: #e0e0e0;
+    --window-bg: rgba(10, 10, 10, 0.9);
+    --window-border: #333;
+    --titlebar-bg: #e0e0e0;
+    --titlebar-text: #050505;
+
+    --font-mono: 'Share Tech Mono', monospace;
+}
+
+html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-color);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    line-height: 1.6;
+    -webkit-font-smoothing: none;
+    /* Blocky retro feel */
+    overflow-x: hidden;
+
+    /* Creating the background grid */
+    background-size: 40px 40px;
+    background-image:
+        linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+}
+
+/* --- VHS & CRT OVERLAYS --- */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 4px, 3px 100%;
+    z-index: 9998;
+    pointer-events: none;
+    /* Let clicks pass through */
+}
+
+.vhs-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 9999;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.vhs-play {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 0 #f00, -2px -2px 0 #00f;
+    animation: blink 2s infinite;
+}
+
+.vhs-time {
+    font-size: 1.2rem;
+    color: #fff;
+    text-shadow: 1px 1px 0 #f00;
+    margin-top: auto;
+}
+
+/* --- TYPOGRAPHY --- */
+h1,
+h2,
+h3 {
+    font-weight: normal;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    color: var(--text-white);
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+p {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+a:hover {
+    color: var(--text-white);
+    background-color: var(--text-primary);
+}
+
+/* --- LAYOUT & OS UI --- */
+.os-container {
+    position: relative;
+    z-index: 10;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Pill Navigation */
+header {
+    position: fixed;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+}
+
+.pill-nav {
+    display: flex;
+    align-items: center;
+    background: var(--titlebar-bg);
+    padding: 0.5rem 2rem;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--window-border);
+}
+
+.nav-brand {
+    color: var(--titlebar-text);
+    font-weight: bold;
+    margin-right: 2rem;
+}
+
+.nav-brand a {
+    font-size: 1rem;
+    /* Keeps it the normal size */
+    padding: 0;
+}
+
+.nav-brand a:hover {
+    background: transparent;
+    /* Removes the white highlight when hovered */
+    color: var(--titlebar-text);
+}
+
+.pill-nav ul {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+}
+
+.pill-nav a {
+    color: var(--titlebar-text);
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+.pill-nav a:hover {
+    background: var(--titlebar-text);
+    color: var(--titlebar-bg);
+}
+
+/* Highlights the current active page */
+.pill-nav a.active {
+    background: var(--titlebar-text);
+    color: var(--titlebar-bg);
+}
+
+main {
+    margin-top: 8rem;
+}
+
+/* OS Window Component */
+.os-window {
+    background: var(--window-bg);
+    border: 2px solid var(--window-border);
+    margin-bottom: 4rem;
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.8);
+    position: relative;
+}
+
+.window-titlebar {
+    background: var(--titlebar-bg);
+    color: var(--titlebar-text);
+    padding: 0.2rem 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--window-border);
+    font-weight: bold;
+}
+
+.window-close {
+    cursor: pointer;
+    border: 1px solid var(--titlebar-text);
+    padding: 0 4px;
+    line-height: 1;
+}
+
+.window-close:hover {
+    background: var(--titlebar-text);
+    color: var(--titlebar-bg);
+}
+
+.window-content {
+    padding: 2rem;
+}
+
+/* Hero specific */
+.hero-content {
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.blink-cursor {
+    animation: blink 1s step-end infinite;
+}
+
+/* Projects */
+.project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.project-card {
+    border: 1px dotted var(--text-primary);
+    padding: 1.5rem;
+    transition: all 0.2s;
+}
+
+.project-card:hover {
+    background: rgba(0, 255, 65, 0.1);
+    transform: translate(-3px, -3px);
+    box-shadow: 3px 3px 0 var(--text-primary);
+}
+
+/* Contact Pills */
+.contact-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.pill-btn {
+    display: inline-block;
+    background: var(--titlebar-bg);
+    color: var(--titlebar-text);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border: 2px solid transparent;
+}
+
+.pill-btn:hover {
+    background: transparent;
+    color: var(--titlebar-bg);
+    border-color: var(--titlebar-bg);
+}
+
+/* --- FORMS --- */
+.retro-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: var(--text-white);
+}
+
+.retro-form input,
+.retro-form textarea {
+    background: var(--bg-color);
+    border: 1px solid var(--text-primary);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    padding: 0.8rem;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.retro-form input:focus,
+.retro-form textarea:focus {
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+    border-width: 2px;
+}
+
+.submit-btn {
+    align-self: flex-start;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.animate-on-scroll {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Bouncy reveal */
+}
+
+.animate-on-scroll.fade-in {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+#hero.animate-on-scroll {
+    animation: windowPopIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes windowPopIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* 
+--- MODAL POP-UPS ---
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-window {
+    width: 90%;
+    max-width: 600px;
+    animation: windowPopIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+*/
+
+/* --- DRAGGABLE WINDOWS --- */
+.draggable-window {
+    display: none;
+    /* Hidden until clicked */
+    position: absolute;
+    /* This lets us place it anywhere based on top/left coordinates */
+    top: 20%;
+    left: 10%;
+    width: 400px;
+    z-index: 1000;
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.8);
+}
+
+.draggable-window.visible {
+    display: block;
+}
+
+/* We need the titlebar to feel like you can grab it */
+.draggable-window .window-titlebar {
+    cursor: grab;
+}
+
+.draggable-window .window-titlebar:active {
+    cursor: grabbing;
+    /* Changes icon when holding down mouse */
+}
+
+/* --- HIGHLIGHT GRID (Homepage Previews) --- */
+.highlight-grid {
+    display: grid;
+    /* This creates columns that shrink/grow to fit the screen */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.highlight-card {
+    position: relative;
+    /* ADD THIS LINE inside the existing rule */
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-color);
+    border: 1px solid var(--window-border);
+    text-decoration: none;
+    transition: all 0.2s;
+    overflow: hidden;
+    /* Keeps images inside borders */
+}
+
+/* NEW: dark scrim that only shows on hover */
+.highlight-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.highlight-card:hover::before {
+    opacity: 1;
+}
+
+.highlight-card img,
+.highlight-card .highlight-info {
+    position: relative;
+    z-index: 0;
+}
+
+.highlight-card:hover h3,
+.highlight-card:hover p {
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+    color: black;
+}
+
+/* Image styling */
+.highlight-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    /* Ensures images don't stretch weirdly */
+    filter: grayscale(100%) contrast(1.2);
+    /* Make images match the retro theme! */
+    transition: filter 0.3s;
+}
+
+.highlight-info {
+    padding: 1rem;
+    border-top: 1px solid var(--window-border);
+}
+
+.highlight-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+}
+
+.highlight-info p {
+    font-size: 0.9rem;
+    margin: 0;
+    opacity: 0.7;
+}
+
+.highlight-card:hover p {
+    opacity: 1;
+}
+
+/* Hover Effects */
+.highlight-card:hover {
+    border-color: var(--text-primary);
+    transform: translateY(-5px);
+    box-shadow: 5px 5px 0 var(--text-primary);
+}
+
+/* Remove grayscale when hovered! */
+.highlight-card:hover img {
+    filter: grayscale(0%);
+}
+
+/* --- OS BOOT SEQUENCE (CRT Splice Animation) --- */
+.boot-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100000;
+    pointer-events: none;
+    /* Lets you click through it while it animates away */
+}
+
+/* The two black backgrounds that construct the screen */
+.boot-panel {
+    position: absolute;
+    width: 100%;
+    height: 50vh;
+    /* Half the screen each */
+    background-color: var(--bg-color);
+    /* Pitch black */
+    transition: transform 0.6s cubic-bezier(0.8, 0, 0.2, 1);
+    /* Snappy CRT curve */
+}
+
+.boot-panel.top {
+    top: 0;
+}
+
+.boot-panel.bottom {
+    bottom: 0;
+}
+
+/* When hidden, the top flies UP, the bottom flies DOWN */
+.boot-container.hidden .boot-panel.top {
+    transform: translateY(-100%);
+}
+
+.boot-container.hidden .boot-panel.bottom {
+    transform: translateY(100%);
+}
+
+/* The text content container */
+.boot-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    z-index: 100001;
+    /* Above the black panels */
+    transition: opacity 0.2s ease-out;
+    /* Text fades out slightly faster than the split */
+}
+
+/* Hide text when the sequence finishes */
+.boot-container.hidden .boot-content {
+    opacity: 0;
+}
+
+/* Text Typing Delays (Same as before) */
+.boot-text p {
+    margin: 0.5rem 0;
+    opacity: 0;
+    animation: typeLine 0.1s forwards;
+}
+
+.boot-text p.delay-1 {
+    animation-delay: 0.5s;
+}
+
+.boot-text p.delay-2 {
+    animation-delay: 1.0s;
+}
+
+.boot-text p.delay-3 {
+    animation-delay: 1.5s;
+}
+
+.boot-text p.delay-4 {
+    animation-delay: 2.0s;
+    opacity: 1;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes typeLine {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

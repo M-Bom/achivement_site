@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Sec_Portfolio</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- VHS/CRT OVERLAYS -->
+    <div class="scanlines"></div>
+    <div class="vhs-overlay">
+        <div class="vhs-play">PLAY ►</div>
+        <div class="vhs-time">00.00.00.00</div>
+    </div>
+
+    <!-- MAIN OS CONTAINER -->
+    <div class="os-container">
+
+        <header>
+            <nav class="pill-nav">
+                <div class="nav-brand"><a href="index.html">ROOT@HOME:~#</a></div>
+                <ul>
+                    <li><a href="profile.html">PROFILE</a></li>
+                    <li><a href="projects.html">PROJECTS</a></li>
+                    <li><a href="contact.html" class="active">CONTACT</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section class="os-window animate-on-scroll">
+                <div class="window-titlebar">
+                    <span class="window-title">C:\system\secure_comms.exe</span>
+                    <span class="window-close">✕</span>
+                </div>
+                <div class="window-content">
+                    <h2>Encrypted Channel</h2>
+                    <p>> Please enter your query below or contact me directly via <a
+                            href="mailto:shkrobotm3@gmail.com">email</a>.</p>
+                    <br>
+
+                    <!-- The Contact Form -->
+                    <form action="#" method="POST" class="retro-form">
+                        <div class="form-group">
+                            <label for="name">> TARGET_ALIAS (Name):</label>
+                            <input type="text" id="name" name="name" required placeholder="Enter name...">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">> REPLY_ADDRESS (Email):</label>
+                            <input type="email" id="email" name="email" required placeholder="Enter email...">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">> PAYLOAD (Message):</label>
+                            <textarea id="message" name="message" rows="5" required
+                                placeholder="Enter transmission..."></textarea>
+                        </div>
+
+                        <button type="submit" class="pill-btn submit-btn">TRANSMIT_DATA</button>
+                    </form>
+
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+
+</html>
